@@ -1,0 +1,118 @@
+/* All motion is keyframe-driven and tied to .stage.slapping. Removing and re-adding
+   the class (with a forced reflow) restarts everything from the neutral pose, so
+   nothing accumulates between clicks. Total sequence: 700ms. */
+
+/* ---------- Idle (subtle, always on) ---------- */
+@keyframes breathe  { 0%,100% { transform: translateY(0) } 50% { transform: translateY(calc(-3 * var(--u))) } }
+@keyframes nervous  { 0%,100% { transform: translateX(0) rotate(0) } 25% { transform: translateX(calc(-1.5 * var(--u))) rotate(-.4deg) } 75% { transform: translateX(calc(1.5 * var(--u))) rotate(.4deg) } }
+@keyframes sweat-idle { 0%,100% { opacity: 0; transform: translateY(0) } 30% { opacity: 1 } 80% { opacity: 0; transform: translateY(calc(18 * var(--u))) } }
+
+.gf-sway { transform-origin: 50% 100%; animation: breathe 3.2s ease-in-out infinite; }
+.bf-shake { transform-origin: 50% 100%; animation: nervous .5s linear infinite; }
+.sweat-a { animation: sweat-idle 2.4s ease-in infinite; }
+.sweat-b { animation: sweat-idle 2.4s ease-in 1.1s infinite; }
+
+/* Slapping: replace idle with the hit sequence */
+.slapping .gf-sway { animation: gf-lunge .7s cubic-bezier(.3,.7,.4,1) both; }
+.slapping .bf-shake { animation: bf-hit .7s linear both; }
+
+/* Girlfriend body leans back, then lunges toward him */
+@keyframes gf-lunge {
+  0%   { transform: translateX(0) rotate(0) }
+  22%  { transform: translateX(calc(14 * var(--u))) rotate(2.5deg) }
+  38%  { transform: translateX(calc(-30 * var(--u))) rotate(-4deg) }
+  62%  { transform: translateX(calc(-8 * var(--u))) rotate(-1deg) }
+  100% { transform: translateX(0) rotate(0) }
+}
+
+/* Arm: wind-up sprite pulls back, then slap sprite whips forward around the shoulder */
+.slapping .arm-windup { animation: arm-windup .7s ease-out both; }
+.slapping .arm-slap   { animation: arm-slap .7s ease-out both; }
+@keyframes arm-windup {
+  0%   { opacity: 1; transform: rotate(8deg) }
+  22%  { opacity: 1; transform: rotate(18deg) translateX(calc(10 * var(--u))) }
+  30%  { opacity: 1; transform: rotate(-6deg) }
+  32%  { opacity: 0 }
+  100% { opacity: 0 }
+}
+@keyframes arm-slap {
+  0%, 29% { opacity: 0; transform: rotate(18deg) }
+  32%  { opacity: 1; transform: rotate(10deg) }
+  42%  { opacity: 1; transform: rotate(-8deg) translateX(calc(-18 * var(--u))) }
+  55%  { opacity: 1; transform: rotate(-4deg) translateX(calc(-8 * var(--u))) }
+  78%  { opacity: 1; transform: rotate(14deg) }
+  92%  { opacity: 0; transform: rotate(18deg) }
+  100% { opacity: 0 }
+}
+
+/* Boyfriend: waits, gets hit at ~40%, shakes, recoils, recovers */
+@keyframes bf-hit {
+  0%, 36% { transform: translateX(0) rotate(0) }
+  40%  { transform: translateX(calc(-46 * var(--u))) rotate(-9deg) }
+  46%  { transform: translateX(calc(-30 * var(--u))) rotate(-5deg) }
+  50%  { transform: translateX(calc(-44 * var(--u))) rotate(-8deg) }
+  55%  { transform: translateX(calc(-28 * var(--u))) rotate(-4deg) }
+  60%  { transform: translateX(calc(-38 * var(--u))) rotate(-7deg) }
+  66%  { transform: translateX(calc(-24 * var(--u))) rotate(-3deg) }
+  78%  { transform: translateX(calc(-10 * var(--u))) rotate(3deg) }
+  90%  { transform: translateX(calc(2 * var(--u))) rotate(-1deg) }
+  100% { transform: translateX(0) rotate(0) }
+}
+
+/* Face swap: surprised/hurt face, then dizzy, then back to normal */
+.slapping .bf-hit   { animation: face-hit .7s steps(1, end) both; }
+.slapping .bf-dizzy { animation: face-dizzy .7s steps(1, end) both; }
+@keyframes face-hit   { 0%, 37% { opacity: 0 } 38%, 66% { opacity: 1 } 67%, 100% { opacity: 0 } }
+@keyframes face-dizzy { 0%, 66% { opacity: 0 } 67%, 92% { opacity: 1 } 93%, 100% { opacity: 0 } }
+
+.slapping .sweat-a, .slapping .sweat-b { animation: sweat-burst .7s ease-out both; }
+@keyframes sweat-burst {
+  0%, 38% { opacity: 0; transform: translate(0, 0) scale(.6) }
+  45% { opacity: 1; transform: translate(calc(-4 * var(--u)), calc(-10 * var(--u))) scale(1.1) }
+  100% { opacity: 0; transform: translate(calc(16 * var(--u)), calc(-34 * var(--u))) scale(1) }
+}
+
+/* Impact burst */
+.slapping .burst { animation: burst .7s ease-out both; }
+.slapping .pow   { animation: pow .7s ease-out both; }
+.slapping .star-a { animation: star-fly-a .7s ease-out both; }
+.slapping .star-b { animation: star-fly-b .7s ease-out both; }
+@keyframes burst {
+  0%, 36% { opacity: 0; transform: scale(.2) rotate(var(--tilt)) }
+  42%  { opacity: 1; transform: scale(1.15) rotate(var(--tilt)) }
+  60%  { opacity: 1; transform: scale(.95) rotate(var(--tilt)) }
+  85%  { opacity: 0; transform: scale(1.05) rotate(var(--tilt)) }
+  100% { opacity: 0 }
+}
+@keyframes pow {
+  0%, 38% { opacity: 0; transform: scale(.3) rotate(-10deg) }
+  44%  { opacity: 1; transform: scale(1.25) rotate(-10deg) }
+  62%  { opacity: 1; transform: scale(1) rotate(-10deg) }
+  85%, 100% { opacity: 0; transform: scale(1) rotate(-10deg) }
+}
+@keyframes star-fly-a {
+  0%, 40% { opacity: 0; transform: translate(0,0) rotate(0) scale(.4) }
+  48% { opacity: 1 }
+  100% { opacity: 0; transform: translate(calc(-60 * var(--u)), calc(-60 * var(--u))) rotate(200deg) scale(1) }
+}
+@keyframes star-fly-b {
+  0%, 40% { opacity: 0; transform: translate(0,0) rotate(0) scale(.4) }
+  48% { opacity: 1 }
+  100% { opacity: 0; transform: translate(calc(-40 * var(--u)), calc(70 * var(--u))) rotate(-180deg) scale(1) }
+}
+
+/* Whole-stage punch: tiny screen shake on impact */
+.slapping { animation: stage-shake .7s linear both; }
+@keyframes stage-shake {
+  0%, 38% { transform: translate(0,0) }
+  42% { transform: translate(5px, -3px) }
+  48% { transform: translate(-5px, 3px) }
+  54% { transform: translate(3px, -2px) }
+  60% { transform: translate(-2px, 1px) }
+  70%, 100% { transform: translate(0,0) }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gf-sway, .bf-shake, .sweat-a, .sweat-b { animation: none; }
+  .slapping { animation: none; }
+}

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Punish Your Boyfriend</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>😈</text></svg>" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="header">
+        <h1 class="title">PUNISH YOUR BOYFRIEND <span aria-hidden="true">😈</span></h1>
+        <p class="subtitle">A little apology won't save you.</p>
+      </header>
+
+      <section class="stage" id="stage" aria-label="Girlfriend and boyfriend">
+        <div class="floor"></div>
+
+        <!-- Boyfriend (left) -->
+        <div class="char boyfriend" id="boyfriend">
+          <div class="bf-shake">
+            <img class="bf-body" src="./assets/characters/boyfriend/boyfriend_idle.png" alt="Boyfriend, looking sorry" draggable="false" />
+            <img class="bf-face bf-hit" src="./assets/characters/boyfriend/boyfriend_hit.png" alt="" draggable="false" />
+            <img class="bf-face bf-dizzy" src="./assets/characters/boyfriend/boyfriend_dizzy.png" alt="" draggable="false" />
+            <img class="fx sweat sweat-a" src="./assets/effects/effect_sweat.svg" alt="" draggable="false" />
+            <img class="fx sweat sweat-b" src="./assets/effects/effect_sweat.svg" alt="" draggable="false" />
+          </div>
+          <div class="bubble bubble-bf" id="bubble-bf">I'm sorry... 🥺</div>
+        </div>
+
+        <!-- Girlfriend (right) -->
+        <div class="char girlfriend" id="girlfriend">
+          <div class="gf-sway">
+            <img class="gf-body" src="./assets/characters/girlfriend/girlfriend_body.png" alt="Angry girlfriend" draggable="false" />
+            <div class="gf-arm" id="gf-arm">
+              <img class="arm arm-windup" src="./assets/characters/girlfriend/gf_arm_windup.png" alt="" draggable="false" />
+              <img class="arm arm-slap" src="./assets/characters/girlfriend/gf_arm_slap.png" alt="" draggable="false" />
+            </div>
+          </div>
+          <div class="bubble bubble-gf">Hmph! 😤</div>
+        </div>
+
+        <!-- Impact effects (re-created as vector so they have clean transparency) -->
+        <div class="impact" id="impact" aria-hidden="true">
+          <svg class="burst" viewBox="-100 -100 200 200">
+            <defs>
+              <radialGradient id="bg" r="1">
+                <stop offset="0" stop-color="#fff" />
+                <stop offset=".45" stop-color="#fff3a0" />
+                <stop offset="1" stop-color="#ffb21e" />
+              </radialGradient>
+            </defs>
+            <polygon fill="#e8262d" points="0,-98 17,-60 52,-82 46,-40 90,-48 62,-14 100,6 58,20 82,58 40,46 36,92 12,56 -10,96 -20,52 -58,84 -50,40 -94,40 -62,10 -98,-12 -56,-24 -76,-62 -34,-46 -30,-90 -10,-54" />
+            <polygon fill="url(#bg)" transform="scale(.78) rotate(14)" points="0,-98 17,-60 52,-82 46,-40 90,-48 62,-14 100,6 58,20 82,58 40,46 36,92 12,56 -10,96 -20,52 -58,84 -50,40 -94,40 -62,10 -98,-12 -56,-24 -76,-62 -34,-46 -30,-90 -10,-54" />
+          </svg>
+          <span class="pow">SLAP!</span>
+          <img class="fx star star-a" src="./assets/effects/effect_stars.svg" alt="" draggable="false" />
+          <img class="fx star star-b" src="./assets/effects/effect_stars.svg" alt="" draggable="false" />
+        </div>
+      </section>
+
+      <button class="slap-btn" id="slap-btn" type="button" aria-label="Slap him!">
+        <svg class="hand" viewBox="0 0 64 64" aria-hidden="true">
+          <g fill="#fff" stroke="#c2185b" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+            <!-- fingers -->
+            <rect x="17" y="8" width="7" height="26" rx="3.5" transform="rotate(-12 20 34)" />
+            <rect x="25" y="4" width="7" height="30" rx="3.5" transform="rotate(-4 28 34)" />
+            <rect x="33" y="4" width="7" height="30" rx="3.5" transform="rotate(4 36 34)" />
+            <rect x="41" y="9" width="7" height="26" rx="3.5" transform="rotate(12 44 34)" />
+            <!-- palm -->
+            <path d="M16 32 L50 32 Q52 46 44 54 Q36 60 28 56 Q18 52 16 40 Z" />
+            <!-- thumb -->
+            <path d="M16 38 Q6 32 8 26 Q10 22 14 25 L20 33 Z" />
+          </g>
+          <g stroke="#fff" stroke-width="2.4" stroke-linecap="round" opacity=".85">
+            <path d="M54 14 L60 8" /><path d="M56 24 L63 22" /><path d="M6 12 L2 6" />
+          </g>
+        </svg>
+        <span class="label">SLAP!</span>
+      </button>
+      <p class="hint">Tap as many times as you like.</p>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
